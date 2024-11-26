@@ -137,7 +137,7 @@ fi
 
 
 cd /Bridge
-touch 
+
 show_message "[6/7] changed working directory to /Bridge"
 $wine_executable python -m venv venv
 show_message "[6/7] created new venv"
