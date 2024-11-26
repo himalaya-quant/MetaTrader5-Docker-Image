@@ -37,6 +37,11 @@ RUN apt-get install --install-recommends -y \
 
 COPY /Metatrader /Metatrader
 RUN chmod +x /Metatrader/start.sh
+
+RUN mkdir /Bridge
+COPY /Bridge /Bridge/bridge.py
+COPY /Bridge /Bridge/requirements.txt
+
 COPY /root /
 
 EXPOSE 3000 8001
