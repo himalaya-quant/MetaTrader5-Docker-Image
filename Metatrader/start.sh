@@ -135,8 +135,7 @@ $wine_executable python -m venv venv
 show_message "[6/7] created new venv"
 $wine_executable ./venv/Scripts/activate.bat
 show_message "[6/7] activated venv"
-#$wine_executable python -m pip install -r requirements.txt
-$wine_executable python -m pip install MetaTrader5
+$wine_executable python -m pip install -r requirements.txt
 show_message "[6/7] intalled requirements"
 $wine_executable python /Bridge/bridge.py
 show_message "[6/7] script ran. Test completed"
