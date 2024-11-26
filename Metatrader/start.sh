@@ -129,7 +129,15 @@ fi
 # fi
 
 show_message "[6/7] running python bridge test"
+cd /config/.wine/drive_c/
+touch myconfiguration.ini
+echo "[Common]" >> myconfiguration.ini
+echo "Login=52030218" >> myconfiguration.ini
+echo 'Password=Lu0j2cU&$9tO$X' >> myconfiguration.ini
+echo 'Server=ICMarketsEU-Demo' >> myconfiguration.ini
+
 cd /Bridge
+touch 
 show_message "[6/7] changed working directory to /Bridge"
 $wine_executable python -m venv venv
 show_message "[6/7] created new venv"

@@ -24,11 +24,13 @@ def run_test():
     data = mt5.copy_ticks_from("EURAUD", datetime(
         2020, 1, 28, 13), 1000, mt5.COPY_TICKS_ALL)
 
-    file_path = "mt5-test-result.json"
-    json.dump(data.tolist(), codecs.open(file_path, 'w', encoding='utf-8'),
-              separators=(',', ':'),
-              sort_keys=True,
-              indent=4)
+    print(data)
+
+    # file_path = "mt5-test-result.json"
+    # json.dump(data.tolist(), codecs.open(file_path, 'w', encoding='utf-8'),
+    #           separators=(',', ':'),
+    #           sort_keys=True,
+    #           indent=4)
 
     mt5.shutdown()
 
