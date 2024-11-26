@@ -130,7 +130,7 @@ echo 'Server=ICMarketsEU-Demo' >> myconfiguration.ini
 # Recheck if MetaTrader 5 is installed
 if [ -e "$mt5file" ]; then
     show_message "[6/7] File $mt5file is installed. Running MT5..."
-    $wine_executable "$mt5file" "/config:c:myconfiguration.ini\ &
+    $wine_executable "$mt5file" "/config:c:myconfiguration.ini" &
 else
     show_message "[6/7] File $mt5file is not installed. MT5 cannot be run."
 fi
