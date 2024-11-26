@@ -8,7 +8,7 @@ path = "c:\\Program Files\\MetaTrader 5\\terminal64.exe"
 
 def run_test():
     # connect to MetaTrader 5
-    if not mt5.initialize(path):
+    if not mt5.initialize(path, account=52030218, password="Lu0j2cU&$9tO$X", server="ICMarketsEU-Demo"):
         print("initialize() failed")
         mt5.shutdown()
         return
