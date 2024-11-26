@@ -66,15 +66,6 @@ else
     rm -f /config/.wine/drive_c/mt5setup.exe
 fi
 
-# Recheck if MetaTrader 5 is installed
-if [ -e "$mt5file" ]; then
-    show_message "[4/7] File $mt5file is installed. Running MT5..."
-    $wine_executable "$mt5file" &
-else
-    show_message "[4/7] File $mt5file is not installed. MT5 cannot be run."
-fi
-
-
 # Install Python in Wine if not present
 if ! $wine_executable python --version 2>/dev/null; then
     show_message "[5/7] Installing Python in Wine..."
@@ -135,6 +126,15 @@ echo "[Common]" >> myconfiguration.ini
 echo "Login=52030218" >> myconfiguration.ini
 echo 'Password=Lu0j2cU&$9tO$X' >> myconfiguration.ini
 echo 'Server=ICMarketsEU-Demo' >> myconfiguration.ini
+
+# Recheck if MetaTrader 5 is installed
+if [ -e "$mt5file" ]; then
+    show_message "[6/7] File $mt5file is installed. Running MT5..."
+    $wine_executable "$mt5file" "/config:c:myconfiguration.ini\ &
+else
+    show_message "[6/7] File $mt5file is not installed. MT5 cannot be run."
+fi
+
 
 cd /Bridge
 touch 
