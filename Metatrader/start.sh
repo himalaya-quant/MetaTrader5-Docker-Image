@@ -67,6 +67,9 @@ else
     rm -f /config/.wine/drive_c/mt5setup.exe
 fi
 
+# Initialize the configuration file for the trading account login setup
+/MetaTrader/init-config.sh
+
 # Recheck if MetaTrader 5 is installed
 if [ -e "$mt5file" ]; then
     show_message "[6/7] File $mt5file is installed. Running MT5..."
