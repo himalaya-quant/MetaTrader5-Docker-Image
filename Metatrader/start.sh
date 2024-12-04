@@ -9,6 +9,7 @@ mt5server_port="8001"
 mono_url="https://dl.winehq.org/wine/wine-mono/8.0.0/wine-mono-8.0.0-x86.msi"
 python_url="https://www.python.org/ftp/python/3.9.0/python-3.9.0.exe"
 mt5setup_url="https://download.mql5.com/cdn/web/metaquotes.software.corp/mt5/mt5setup.exe"
+mt5InitialConfigFile="/config:c:\mt5_initial_config.ini"
 
 # Function to display a graphical message
 show_message() {
@@ -66,17 +67,10 @@ else
     rm -f /config/.wine/drive_c/mt5setup.exe
 fi
 
-# Create the initial configuration files
-cp /Metatrader/mt5_initial_config.ini /config/.wine/drive_c/
-echo "[Common]" >> /config/.wine/drive_c/mt5_initial_config.ini
-echo "Login=${MT5_LOGIN}" >> /config/.wine/drive_c/mt5_initial_config.ini
-echo "Password=${MT5_PASSWORD}" >> /config/.wine/drive_c/mt5_initial_config.ini
-echo "Server=${MT5_SERVER}" >> /config/.wine/drive_c/mt5_initial_config.ini
-
 # Recheck if MetaTrader 5 is installed
 if [ -e "$mt5file" ]; then
     show_message "[6/7] File $mt5file is installed. Running MT5..."
-    $wine_executable "$mt5file" "/config:c:\initial_config.ini" &
+    $wine_executable "$mt5file" "$mt5InitialConfigFile" &
 else
     show_message "[6/7] File $mt5file is not installed. MT5 cannot be run."
 fi
