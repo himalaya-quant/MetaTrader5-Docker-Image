@@ -11,5 +11,5 @@ echo "###################################################"
 cd /Metatrader
 sudo git clone https://github.com/himalaya-quant/kasmvnc-mt5-controller.git
 cd kasmvnc-mt5-controller
-npm i
-npm start
+sudo npm i
+sudo npm start
