@@ -17,6 +17,7 @@ RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y \
     python3-pip \
     wget \
+    git \
     && pip3 install --upgrade pip
 
 # Add WineHQ repository key and APT source
