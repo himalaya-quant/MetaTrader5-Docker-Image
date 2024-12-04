@@ -1,7 +1,2 @@
-touch /Metatrader/initial_config.ini
-echo "[Common]" >> /Metatrader/initial_config.ini
-echo "Login=${MT5_LOGIN}" >> /Metatrader/initial_config.ini
-echo "Password=${MT5_PASSWORD}" >> /Metatrader/initial_config.ini
-echo "Server=${MT5_SERVER}" >> /Metatrader/initial_config.ini
-
+/Metatrader/init-config.sh
 /Metatrader/start.sh

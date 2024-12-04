@@ -66,7 +66,12 @@ else
     rm -f /config/.wine/drive_c/mt5setup.exe
 fi
 
-cp /Metatrader/initial_config.ini /config/.wine/drive_c/
+# Create the initial configuration files
+cp /Metatrader/mt5_initial_config.ini /config/.wine/drive_c/
+echo "[Common]" >> /config/.wine/drive_c/mt5_initial_config.ini
+echo "Login=${MT5_LOGIN}" >> /config/.wine/drive_c/mt5_initial_config.ini
+echo "Password=${MT5_PASSWORD}" >> /config/.wine/drive_c/mt5_initial_config.ini
+echo "Server=${MT5_SERVER}" >> /config/.wine/drive_c/mt5_initial_config.ini
 
 # Recheck if MetaTrader 5 is installed
 if [ -e "$mt5file" ]; then

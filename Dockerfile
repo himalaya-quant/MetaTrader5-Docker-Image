@@ -38,6 +38,8 @@ RUN apt-get install --install-recommends -y \
 COPY /Metatrader /Metatrader
 
 RUN chmod +x /Metatrader/start.sh
+RUN chmod +x /Metatrader/init-config.sh
+
 COPY /root /
 
 EXPOSE 3000 8001
