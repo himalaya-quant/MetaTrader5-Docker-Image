@@ -37,6 +37,7 @@ RUN apt-get install --install-recommends -y \
 
 COPY /Metatrader /Metatrader
 
+RUN sudo chown -R $USER /Metatrader
 RUN chmod +x /Metatrader/start.sh
 RUN chmod +x /Metatrader/init-config.sh
 RUN chmod +x /Metatrader/mt5-auto-login.sh
