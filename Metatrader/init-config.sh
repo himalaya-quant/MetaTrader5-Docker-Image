@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Create the initial configuration files
 cp /Metatrader/mt5_initial_config.ini /config/.wine/drive_c/
 echo "[Common]" >> /config/.wine/drive_c/mt5_initial_config.ini
