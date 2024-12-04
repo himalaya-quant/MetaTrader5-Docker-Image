@@ -68,7 +68,7 @@ else
 fi
 
 # Initialize the configuration file for the trading account login setup
-/MetaTrader/init-config.sh
+/Metatrader/init-config.sh
 
 # Recheck if MetaTrader 5 is installed
 if [ -e "$mt5file" ]; then
