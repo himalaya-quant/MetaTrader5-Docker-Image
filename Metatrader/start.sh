@@ -37,90 +37,90 @@ is_wine_python_package_installed() {
 }
 
 # Check for necessary dependencies
-# check_dependency "curl"
-# check_dependency "$wine_executable"
+check_dependency "curl"
+check_dependency "$wine_executable"
 
-# # Install Mono if not present
-# if [ ! -e "/config/.wine/drive_c/windows/mono" ]; then
-#     show_message "[1/7] Downloading and installing Mono..."
-#     curl -o /config/.wine/drive_c/mono.msi $mono_url
-#     WINEDLLOVERRIDES=mscoree=d $wine_executable msiexec /i /config/.wine/drive_c/mono.msi /qn
-#     rm /config/.wine/drive_c/mono.msi
-#     show_message "[1/7] Mono installed."
-# else
-#     show_message "[1/7] Mono is already installed."
-# fi
+# Install Mono if not present
+if [ ! -e "/config/.wine/drive_c/windows/mono" ]; then
+    show_message "[1/7] Downloading and installing Mono..."
+    curl -o /config/.wine/drive_c/mono.msi $mono_url
+    WINEDLLOVERRIDES=mscoree=d $wine_executable msiexec /i /config/.wine/drive_c/mono.msi /qn
+    rm /config/.wine/drive_c/mono.msi
+    show_message "[1/7] Mono installed."
+else
+    show_message "[1/7] Mono is already installed."
+fi
 
-# # Check if MetaTrader 5 is already installed
-# if [ -e "$mt5file" ]; then
-#     show_message "[2/7] File $mt5file already exists."
-# else
-#     show_message "[2/7] File $mt5file is not installed. Installing..."
+# Check if MetaTrader 5 is already installed
+if [ -e "$mt5file" ]; then
+    show_message "[2/7] File $mt5file already exists."
+else
+    show_message "[2/7] File $mt5file is not installed. Installing..."
 
-#     # Set Windows 10 mode in Wine and download and install MT5
-#     $wine_executable reg add "HKEY_CURRENT_USER\\Software\\Wine" /v Version /t REG_SZ /d "win10" /f
-#     show_message "[3/7] Downloading MT5 installer..."
-#     curl -o /config/.wine/drive_c/mt5setup.exe $mt5setup_url
-#     show_message "[3/7] Installing MetaTrader 5..."
-#     $wine_executable "/config/.wine/drive_c/mt5setup.exe" "/auto" &
-#     wait
-#     rm -f /config/.wine/drive_c/mt5setup.exe
-# fi
+    # Set Windows 10 mode in Wine and download and install MT5
+    $wine_executable reg add "HKEY_CURRENT_USER\\Software\\Wine" /v Version /t REG_SZ /d "win10" /f
+    show_message "[3/7] Downloading MT5 installer..."
+    curl -o /config/.wine/drive_c/mt5setup.exe $mt5setup_url
+    show_message "[3/7] Installing MetaTrader 5..."
+    $wine_executable "/config/.wine/drive_c/mt5setup.exe" "/auto" &
+    wait
+    rm -f /config/.wine/drive_c/mt5setup.exe
+fi
 
-# # Initialize the configuration file for the trading account login setup
-# /Metatrader/init-config.sh
+# Initialize the configuration file for the trading account login setup
+/Metatrader/init-config.sh
 
-# # Recheck if MetaTrader 5 is installed
-# if [ -e "$mt5file" ]; then
-#     show_message "[6/7] File $mt5file is installed. Running MT5..."
-#     $wine_executable "$mt5file" "$mt5InitialConfigFile" &
-# else
-#     show_message "[6/7] File $mt5file is not installed. MT5 cannot be run."
-# fi
+# Recheck if MetaTrader 5 is installed
+if [ -e "$mt5file" ]; then
+    show_message "[6/7] File $mt5file is installed. Running MT5..."
+    $wine_executable "$mt5file" "$mt5InitialConfigFile" &
+else
+    show_message "[6/7] File $mt5file is not installed. MT5 cannot be run."
+fi
 
-# # Install Python in Wine if not present
-# if ! $wine_executable python --version 2>/dev/null; then
-#     show_message "[5/7] Installing Python in Wine..."
-#     curl -L $python_url -o /tmp/python-installer.exe
-#     $wine_executable /tmp/python-installer.exe /quiet InstallAllUsers=1 PrependPath=1
-#     rm /tmp/python-installer.exe
-#     show_message "[5/7] Python installed in Wine."
-# else
-#     show_message "[5/7] Python is already installed in Wine."
-# fi
+# Install Python in Wine if not present
+if ! $wine_executable python --version 2>/dev/null; then
+    show_message "[5/7] Installing Python in Wine..."
+    curl -L $python_url -o /tmp/python-installer.exe
+    $wine_executable /tmp/python-installer.exe /quiet InstallAllUsers=1 PrependPath=1
+    rm /tmp/python-installer.exe
+    show_message "[5/7] Python installed in Wine."
+else
+    show_message "[5/7] Python is already installed in Wine."
+fi
 
-# # Upgrade pip and install required packages
-# show_message "[6/7] Installing Python libraries"
-# $wine_executable python -m pip install --upgrade --no-cache-dir pip
-# # Install MetaTrader5 library in Windows if not installed
-# show_message "[6/7] Installing MetaTrader5 library in Windows"
-# if ! is_wine_python_package_installed "MetaTrader5==$metatrader_version"; then
-#     $wine_executable python -m pip install --no-cache-dir MetaTrader5==$metatrader_version
-# fi
-# # Install mt5linux library in Windows if not installed
-# show_message "[6/7] Checking and installing mt5linux library in Windows if necessary"
-# if ! is_wine_python_package_installed "mt5linux"; then
-#     $wine_executable python -m pip install --no-cache-dir mt5linux
-# fi
+# Upgrade pip and install required packages
+show_message "[6/7] Installing Python libraries"
+$wine_executable python -m pip install --upgrade --no-cache-dir pip
+# Install MetaTrader5 library in Windows if not installed
+show_message "[6/7] Installing MetaTrader5 library in Windows"
+if ! is_wine_python_package_installed "MetaTrader5==$metatrader_version"; then
+    $wine_executable python -m pip install --no-cache-dir MetaTrader5==$metatrader_version
+fi
+# Install mt5linux library in Windows if not installed
+show_message "[6/7] Checking and installing mt5linux library in Windows if necessary"
+if ! is_wine_python_package_installed "mt5linux"; then
+    $wine_executable python -m pip install --no-cache-dir mt5linux
+fi
 
-# # Install mt5linux library in Linux if not installed
-# show_message "[6/7] Checking and installing mt5linux library in Linux if necessary"
-# if ! is_python_package_installed "mt5linux"; then
-#     pip install --upgrade --no-cache-dir mt5linux
-# fi
+# Install mt5linux library in Linux if not installed
+show_message "[6/7] Checking and installing mt5linux library in Linux if necessary"
+if ! is_python_package_installed "mt5linux"; then
+    pip install --upgrade --no-cache-dir mt5linux
+fi
 
-# # Install pyxdg library in Linux if not installed
-# show_message "[6/7] Checking and installing pyxdg library in Linux if necessary"
-# if ! is_python_package_installed "pyxdg"; then
-#     pip install --upgrade --no-cache-dir pyxdg
-# fi
+# Install pyxdg library in Linux if not installed
+show_message "[6/7] Checking and installing pyxdg library in Linux if necessary"
+if ! is_python_package_installed "pyxdg"; then
+    pip install --upgrade --no-cache-dir pyxdg
+fi
 
-# # Start the MT5 server on Linux
-# show_message "[7/7] Starting the mt5linux server..."
-# python3 -m mt5linux --host 0.0.0.0 -p $mt5server_port -w $wine_executable python.exe &
+# Start the MT5 server on Linux
+show_message "[7/7] Starting the mt5linux server..."
+python3 -m mt5linux --host 0.0.0.0 -p $mt5server_port -w $wine_executable python.exe &
 
-# # Give the server some time to start
-# sleep 5
+# Give the server some time to start
+sleep 5
 
 # run the auto login script
 /Metatrader/mt5-auto-login.sh
