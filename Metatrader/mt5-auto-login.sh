@@ -1,2 +1,5 @@
-npm i --prefix /kamsvnc-mt5-controller/package.json
-npm --prefix /kamsvnc-mt5-controller start
+cd /Metatrader
+git clone git@github.com:himalaya-quant/kasmvnc-mt5-controller.git
+cd kasmvnc-mt5-controller
+npm i
+npm start

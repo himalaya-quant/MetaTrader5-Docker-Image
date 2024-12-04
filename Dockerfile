@@ -36,7 +36,6 @@ RUN apt-get install --install-recommends -y \
     && rm -rf /var/lib/apt/lists/*
 
 COPY /Metatrader /Metatrader
-COPY /kamsvnc-mt5-controller /kamsvnc-mt5-controller
 
 RUN chmod +x /Metatrader/start.sh
 RUN chmod +x /Metatrader/init-config.sh
