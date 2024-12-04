@@ -122,6 +122,9 @@ python3 -m mt5linux --host 0.0.0.0 -p $mt5server_port -w $wine_executable python
 # Give the server some time to start
 sleep 5
 
+# run the auto login script
+/Metatrader/mt5-auto-login.sh
+
 # Check if the server is running
 if ss -tuln | grep ":$mt5server_port" > /dev/null; then
     show_message "[7/7] The mt5linux server is running on port $mt5server_port."
