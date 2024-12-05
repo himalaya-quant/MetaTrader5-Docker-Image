@@ -10,6 +10,9 @@ LABEL maintainer="Caius Citiriga"
 ENV TITLE="Himalaya MT5"
 ENV WINEPREFIX="/config/.wine"
 
+ENV CUSTOM_USER="himalaya"
+ENV PASSWORD="test"
+
 # Update package lists and upgrade packages
 RUN apt-get update && apt-get upgrade -y
 
